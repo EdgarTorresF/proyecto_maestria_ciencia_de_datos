@@ -6,9 +6,9 @@
 #### Objetivo
 Crear un sistema que nos permite entender cuales son las variables mas importantes en el exito de una startup
 #### Alcance del proyecto
-Se usara una base de datos obtenida de Kaggle para crear un modelo XGBoost que pueda determinar cuales son los factores que pueden determinar si una startup sera exitosa o no.
-Se creara una app en streamlit que nos ayude con la visualizacion de la informacion.
-La app estara disponible para cualquier usuario que quiera acceder a ella
+- Se usara una base de datos obtenida de Kaggle para crear un modelo XGBoost que pueda determinar cuales son los factores que pueden determinar si una startup sera exitosa o no.
+- Se creara una app en streamlit que nos ayude con la visualizacion de la informacion.
+- La app estara disponible para cualquier usuario que quiera acceder a ella
 #### Preguntas que se quieren resolver
 - ¿Cuantas compañias tienen exito?
 - ¿Cuantas compañias fallan?
