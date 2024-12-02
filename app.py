@@ -28,9 +28,13 @@ st.divider()
 app_record = pd.read_csv('/Users/edgartorres/Documents/GitHub/Proyecto Final Ciencia de Datos/application_record.csv')
 cred_record = pd.read_csv('/Users/edgartorres/Documents/GitHub/Proyecto Final Ciencia de Datos/credit_record.csv')
 
+# Tenemos una base de datos con 439K registros que contiene informacion de los usuarios como:
+# genero, edad, estado civil, ingresos, informacion sobre su casa, info sobre su atuo, etc....
 st.text("Revisamos algunos datos de la base de datos de Solicitudes")
 st.dataframe(app_record)
 
+# En esta 2a base de datos tenemos informacion crediticia de los mismos clientes
+# Podemos usar el ID para unir la informacion de ambas bases
 st.text("Revisamos algunos datos de la base de datos de Créitos")
 st.dataframe(cred_record)
 
@@ -40,12 +44,13 @@ fig = make_subplots(
     rows=3, cols=3,
     subplot_titles=(
         'Género', 'Ingresos', 'Nivel Educativo', 
-        'Estatus Marital', 'Tipo de Hogar', 'Edad', 
+        'Estado Civil', 'Tipo de Hogar', 'Edad', 
         'Antigüedad Laboral'
     )
 )
 
 # Distribución por Género
+# Podemos ver que la mayor parte de nuestros clientes es Mujer 
 gender_fig = px.histogram(
     app_record, x='CODE_GENDER', color='CODE_GENDER', title='Distribución por Género',
     color_discrete_sequence=px.colors.qualitative.Pastel, template='plotly_dark'
@@ -62,6 +67,8 @@ for trace in income_fig.data:
     fig.add_trace(trace, row=1, col=2)
 
 # Distribución por Nivel Educativo
+# Podemos ver que la mayor parte de nuestros usuatios unicamente tienen nivel Educativo de Secundaria,
+# seguido por personas con nivel educativo Universitario
 education_fig = px.histogram(
     app_record, x='NAME_EDUCATION_TYPE', color='NAME_EDUCATION_TYPE', 
     title='Distribución por Nivel Educativo',
@@ -71,6 +78,8 @@ for trace in education_fig.data:
     fig.add_trace(trace, row=1, col=3)
 
 # Distribución por Estado Civil
+# Podemos ver que la mayor parte de nuestros usuarios son casados, seguidos por los solteros y en un 3er lugar 
+# las personas divorciadas
 family_fig = px.histogram(
     app_record, x='NAME_FAMILY_STATUS', color='NAME_FAMILY_STATUS', 
     title='Distribución por Estado Civil',
@@ -80,6 +89,7 @@ for trace in family_fig.data:
     fig.add_trace(trace, row=2, col=1)
 
 # Distribución por Tipo de Hogar
+# La gran mayoria de los usuarios cuentas con un hogar o departamento
 housing_fig = px.histogram(
     app_record, x='NAME_HOUSING_TYPE', color='NAME_HOUSING_TYPE', 
     title='Distribución por Tipo de Hogar',
@@ -89,6 +99,7 @@ for trace in housing_fig.data:
     fig.add_trace(trace, row=2, col=2)
 
 # Distribución por Edad
+# Tenemos un rango muy amplio de edades desde los 20 hasta arriba de los 60 años
 app_record['AGE'] = app_record['DAYS_BIRTH'] // -365
 age_fig = px.histogram(
     app_record, x='AGE', nbins=50, title='Distribución por Edad',
@@ -98,9 +109,10 @@ for trace in age_fig.data:
     fig.add_trace(trace, row=2, col=3)
 
 # Distribución por Antigüedad Laboral
+# Podemos ver que tenemos algunos datos erroneos en los datos ya que observamos algunas antigüedades que no son reales
 app_record['YEARS_EMPLOYED'] = app_record['DAYS_EMPLOYED'] / 365
 employed_fig = px.histogram(
-    app_record, x='YEARS_EMPLOYED', nbins=50, title='Distribución por Antigüedad Laboral',
+    app_record, x='YEARS_EMPLOYED', title='Distribución por Antigüedad Laboral',
     color_discrete_sequence=['#AB63FA'], template='plotly_dark'
 )
 for trace in employed_fig.data:
@@ -109,7 +121,7 @@ for trace in employed_fig.data:
 # Ajustes del layout
 fig.update_layout(
     height=900, width=1200, title_text='Distribución de Variables', 
-    title_font_size=24, title_x=0.5, showlegend=False
+    title_font_size=24, title_x=0.5, showlegend=True
 )
 
 fig
@@ -149,6 +161,7 @@ scatter_fig
 st.divider()
 
 # Heatmap de la Matriz de Correlación
+# La martiz de correlación nos ayuda a entender como se relacionan entre si las variables numericas de nuestra base de datos
 numerical_cols = app_record.select_dtypes(include=[np.number]).columns
 correlation_matrix = app_record[numerical_cols].corr()
 
@@ -192,6 +205,8 @@ merged_df = pd.merge(app_record, cred_record, on='ID')
 
 
 # Clasificamos a los clientes como buenos o malos de acuerdo al STATUS y agregamos esa columna al merged_df
+# En esta parte se hace una suposicion muy basica para poder resolver nuestro problema pero en realidad se tendria 
+# que hacer un analisis mas profundo del historial crediticio para poder determinar si un cliente es bueno o malo
 def classify_client(status):
     if status in ['2', '3', '4', '5']:
         return 'bad'
@@ -241,7 +256,7 @@ X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled, te
 
 
 
-# Se crear la funcio para las Matrices de Confusion de los Modelos
+# Se crear la funcion para las Matrices de Confusion de los Modelos
 def plot_confusion_matrix(cm, labels):
     fig, ax = plt.subplots()
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=labels)
