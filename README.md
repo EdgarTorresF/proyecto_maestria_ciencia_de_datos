@@ -2,9 +2,9 @@
 ## Alumno: Edgar Torres
 ## Fecha de Entrega: 2 de Diciembre de 2024
 
-### Titulo: Prediccion de Aprobación de Tarjetas de Crédito
+### Titulo: Predicción de Aprobación de Tarjetas de Crédito
 #### Objetivo
-Creación de una App de Streamlit que nos permita predecir si un usuario es apto a recibir una Tarjeta de Crédito
+Creación de una App de Streamlit que nos permita predecir si un usuario es apto para recibir una Tarjeta de Crédito
 #### Alcance del proyecto
 - Se usará una base de datos obtenida de Kaggle para crear una App en Streamlit que pueda predecir si los usuarios pueden recibir una Tarjeta de Crédito
 - La App nos permitirá hacer un análisis inicial de nuestra base de datos
