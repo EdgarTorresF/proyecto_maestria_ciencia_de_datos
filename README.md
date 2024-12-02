@@ -2,22 +2,23 @@
 ## Alumno: Edgar Torres
 ## Fecha de Entrega: 2 de Diciembre de 2024
 
-### Titulo: Prediccion de exito o fracaso de una Startup
+### Titulo: Prediccion de Aprobación de Tarjetas de Crédito
 #### Objetivo
-Crear un sistema que nos permite entender cuales son las variables mas importantes en el exito de una startup
+Creación de una App de Streamlit que nos permita predecir si un usuario es apto a recibir una Tarjeta de Crédito
 #### Alcance del proyecto
-- Se usara una base de datos obtenida de Kaggle para crear un modelo XGBoost que pueda determinar cuales son los factores que pueden determinar si una startup sera exitosa o no.
-- Se creara una app en streamlit que nos ayude con la visualizacion de la informacion.
-- La app estara disponible para cualquier usuario que quiera acceder a ella
-#### Preguntas que se quieren resolver
-- ¿Cuantas compañias tienen exito?
-- ¿Cuantas compañias fallan?
-- ¿Existe alguna variable que pueda predecir el exito?
-- ¿Existe algun sector con mayor porcentaje de exito?
-- ¿Existe algun pais con mayor porcentaje de exito?
+- Se usará una base de datos obtenida de Kaggle para crear una App en Streamlit que pueda predecir si los usuarios pueden recibir una Tarjeta de Crédito
+- La App nos permitirá hacer un análisis inicial de nuestra base de datos
+- Para poder hacer la predicción se usaràn 3 Modelos
+- La App nos indicará que modelo dio los mejores resultados
 #### Herramientas que se utilizaran
 - Google Colab
 - Github
 - Visual Studio Code
 - Streamlit
+#### Referencias
+- Material de la materia de Ciencia de Datos
+- Material de diplomado en Ciencia de Datos
+- Stack Overflow
+- ChatGPT
+
 
